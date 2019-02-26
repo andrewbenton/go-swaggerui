@@ -28,7 +28,7 @@ func main() {
 	router.HandleFunc("/swagger.json", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(200)
-		w.Write(swaggerJSON)
+		w.Write([]byte(swaggerJSON))
 	})
 	router.PathPrefix("/swagger-ui").Handler(swaggerui.Handle(swaggerui.Config{
 		AppName: "swagger-demo",
@@ -36,7 +36,7 @@ func main() {
 		RootUIPath: "/swagger-ui",
 	}))
 
-	if err := http.ListenAndServe(":80", router); err != nil {
+	if err := http.ListenAndServe(":8080", router); err != nil {
 		fmt.Println(err)
 	}
 }
